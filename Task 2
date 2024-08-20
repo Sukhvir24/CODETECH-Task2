@@ -1,0 +1,75 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class StudentGradeTracker {
+
+    // Method to calculate the average grade
+    public static double calculateAverage(ArrayList<Double> grades) {
+        double sum = 0;
+        for (double grade : grades) {
+            sum += grade;
+        }
+        return sum / grades.size();
+    }
+
+    // Method to determine the letter grade based on the average grade
+    public static String getLetterGrade(double average) {
+        if (average >= 90) {
+            return "A";
+        } else if (average >= 80) {
+            return "B";
+        } else if (average >= 70) {
+            return "C";
+        } else if (average >= 60) {
+            return "D";
+        } else {
+            return "F";
+        }
+    }
+
+    // Method to calculate the GPA based on the average grade
+    public static double calculateGPA(double average) {
+        if (average >= 90) {
+            return 4.0;
+        } else if (average >= 80) {
+            return 3.0;
+        } else if (average >= 70) {
+            return 2.0;
+        } else if (average >= 60) {
+            return 1.0;
+        } else {
+            return 0.0;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Double> grades = new ArrayList<>();
+        String continueInput;
+
+        // Input grades for different subjects or assignments
+        do {
+            System.out.print("Enter the grade (0-100): ");
+            double grade = scanner.nextDouble();
+            grades.add(grade);
+
+            System.out.print("Do you want to add another grade? (yes/no): ");
+            continueInput = scanner.next();
+        } while (continueInput.equalsIgnoreCase("yes"));
+
+        // Calculate average grade
+        double average = calculateAverage(grades);
+
+        // Determine letter grade and GPA
+        String letterGrade = getLetterGrade(average);
+        double gpa = calculateGPA(average);
+
+        // Display the results
+        System.out.println("----- Grade Summary -----");
+        System.out.println("Average Grade: " + average);
+        System.out.println("Letter Grade: " + letterGrade);
+        System.out.println("GPA: " + gpa);
+
+        scanner.close();
+    }
+}
